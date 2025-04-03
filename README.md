@@ -1,6 +1,10 @@
 # trac-subtickets-plugin
 A sub-ticket support plugin for trac
 
+# purpose of the modifier
+The original project has stagnated and is not compatible with Python 3,
+so we aim to make it operational with Python 3.
+
 # Release
 
 1. Comment out the following in `setup.cfg` and commit:
