@@ -1,0 +1,36 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# trac-subtickets-plugin
+A sub-ticket support plugin for trac
+
+## プロジェクトの目的
+このプラグインは開発が停止しており、
+python3への対応、
+trac 1.6への対応が行われていない。
+そこで、元のプロジェクトを fork してこれらの対応を行うことにした。so we aim to make it operational with Python 3.
+
+### python3 への対応
+
+このプラグインは python2 用に書かれており、python3では稼働しない。
+そのため、print 文を print 関数に変更するなど、python3 で稼働するように変更する。
+
+### genshiからjinjs2への対応
+
+tracのテンプレートがgenshiからjinja2に変更された。
+そのため、レンダリング後に呼び出されるコードを実現する方法がなくなった。
+具体的には、web_ui.py の SubTicketsModule が継承していた ITemplateStreamFilter が廃止されたことで、
+ITemplateStreamFilter.stream_filter()が呼び出されなくなった。
+そのため、ここで行われていた親チケット表示時に子チケット一覧を表示する事が出来なくなっている。
+
+そのため、javascriptなどを駆使して同等の機能を実装する必要がある。
+
+コード上は呼び出されなくなったが、
+参考のために ITemplateStreamFilter.stream_filter() は残してある。
+プロジェクト完了時に削除を行うこと。
+
+## 変更の原則
+
+- 可能な限り元のソースは変更しない。大文字小文字も含めて、明らかなエラー以外は触らない。
