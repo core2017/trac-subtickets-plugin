@@ -1,36 +1,26 @@
 ---
 description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
-# trac-subtickets-plugin
-A sub-ticket support plugin for trac
+# project rules
 
-## プロジェクトの目的
-このプラグインは開発が停止しており、
-python3への対応、
-trac 1.6への対応が行われていない。
-そこで、元のプロジェクトを fork してこれらの対応を行うことにした。so we aim to make it operational with Python 3.
+これはプロジェクト固有のルールを記す。
+basic rulesとproject rulesでルールが競合する場合、
+ユーザーに警告したうえでproject rulesを優先すること。
 
-### python3 への対応
+## プロジェクトについて
+- このプロジェクトは元の https://github.com/trac-hacks/trac-subtickets-plugin を fork して機能改良をし、pull request で元のプロジェクトに成果を戻す事を目的としている。
+  - そのため、元のコードは明確にバグなどが無い限り触らないようにする。差分は最小に。
+- このプロジェクトは https://github.com/core2017/trac-subtickets-plugin で差分管理している。
+  - master branch には README.md など pull request に含まない差分も含んでいる。
+  - pr-support-for-trac15 branch は pull request のための最低限の差分のみを含むようにする。
 
-このプラグインは python2 用に書かれており、python3では稼働しない。
-そのため、print 文を print 関数に変更するなど、python3 で稼働するように変更する。
+## プロジェクトの目標
+- 元のプロジェクトは python 2.7 時代のまま放置されており、現代の trac 1.6, python 3.x では動作しない。
+- そのため、以下の2点の改良を行う。
+  - python 3.x で動作するようにする。
+  - trac 1.6 では html templateが genshi から jinja に変更された。元のプロジェクトは genshi を前提に書かれている部分が jinja2 では動かない。その部分を javascript で実装しなおす。
 
-### genshiからjinjs2への対応
-
-tracのテンプレートがgenshiからjinja2に変更された。
-そのため、レンダリング後に呼び出されるコードを実現する方法がなくなった。
-具体的には、web_ui.py の SubTicketsModule が継承していた ITemplateStreamFilter が廃止されたことで、
-ITemplateStreamFilter.stream_filter()が呼び出されなくなった。
-そのため、ここで行われていた親チケット表示時に子チケット一覧を表示する事が出来なくなっている。
-
-そのため、javascriptなどを駆使して同等の機能を実装する必要がある。
-
-コード上は呼び出されなくなったが、
-参考のために ITemplateStreamFilter.stream_filter() は残してある。
-プロジェクト完了時に削除を行うこと。
-
-## 変更の原則
-
-- 可能な限り元のソースは変更しない。大文字小文字も含めて、明らかなエラー以外は触らない。
+## コーディングルール
+- コメントは全て英語で書く。
