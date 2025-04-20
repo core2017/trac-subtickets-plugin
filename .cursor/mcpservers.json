@@ -1,0 +1,12 @@
+{
+    "servers": [
+        {
+            "name": "trac-subtickets-plugin",
+            "description": "A sub-ticket support plugin for Trac",
+            "repository": {
+                "type": "git",
+                "url": "https://github.com/core2017/trac-subtickets-plugin.git"
+            }
+        }
+    ]
+} 
